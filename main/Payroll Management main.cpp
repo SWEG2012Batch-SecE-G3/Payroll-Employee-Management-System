@@ -1,6 +1,6 @@
 #include<iostream>
 using namespace std;
-unsigned short int employeeSize = 100, empCounter = 0;
+const unsigned short int employeeSize = 100, empCounter = 0;
 struct Address
 {
     string phoneNo, email, country, city, poBox;
