@@ -1,6 +1,18 @@
 #include<iostream>
+#include"arrowMenu.h"
 using namespace std;
-const unsigned short int employeeSize = 100, empCounter = 0;
+typedef unsigned short int ushort;
+const ushort employeeSize = 100;
+ushort empCounter = 0;
+string menuArray[] = {"\tMain Menu\n\t---------",
+                      "1. Display All Employee Information",
+                      "2. Display All Employee's Payroll Information",
+                      "3. Information Manipulation",
+                      "4. Statistical Report",
+                      "5. Search",
+                      "6. Sorting",
+                      "7. Exit"
+                     };
 struct Address
 {
     string phoneNo, email, country, city, poBox;
@@ -33,8 +45,25 @@ struct Employee
     string paymentType;     //hourly, weekly, monthly
     string typeOfEmployee;
     bool isDeleted;
-}employee[employeeSize];
+} employee[employeeSize];
 int main()
 {
-
+    int menuSelected = arrowMenu(menuArray, 7);
+    switch(menuSelected)
+    {
+    case 1: //display employee information function
+        break;
+    case 2: //display payroll information function
+        break;
+    case 3: //information manipulation function
+        break;
+    case 4: //statistical report function
+        break;
+    case 5: //search function
+        break;
+    case 6: //sorting function
+        break;
+    case 7: //exit program
+        return 0;
+    }
 }
