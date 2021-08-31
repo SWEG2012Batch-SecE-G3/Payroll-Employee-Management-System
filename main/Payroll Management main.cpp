@@ -46,6 +46,7 @@ struct Employee
     string typeOfEmployee;
     bool isDeleted;
 } employee[employeeSize];
+
 int main()
 {
     int menuSelected = arrowMenu(menuArray, 7);
