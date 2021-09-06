@@ -66,12 +66,12 @@ int arrowMenu(string arrayMenu[], int arrayMenuSizeA, string menuPointer = "->")
             }
             else if(counter < 1)
             {
-                counter = 1;
+                counter = arrayMenuSize-1;
                 display(arrayMenu, counter, arrayMenuSize, menuPointer);
             }
             else if(counter > arrayMenuSize-1)
             {
-                counter = arrayMenuSize-1;
+                counter = 1;
                 display(arrayMenu, counter, arrayMenuSize, menuPointer);
             }
         }
