@@ -81,10 +81,9 @@ vector<Employee> employee;
 #include"employeeFunctions.h"   //contains all the functions for each activity
 int main()
 {
-    readFromFile();
     system(displayNormalScreenSize);
-
 mainMenuloop:
+    readFromFile();
     int menuSelected = arrowMenu(menuArray, 7);
     if(menuSelected == 1) //display employee information function
     {
@@ -205,7 +204,6 @@ statsLoop:
     {
         system("cls");
         sortEmpInfo();
-        cout<<"\nPress any key to exit"<<endl;
         system("pause>0");
         system("cls");
         system(displayNormalScreenSize);

@@ -416,15 +416,11 @@ void readFromFile()
     float initialSalary;
     bool isDeleted;
     float tax, overtime, grossPay, netPay, pension, otherExpenses;
-//    employee.clear();
+    employee.clear();
 
-    fstream file("employees.txt", ios::ate);
+    fstream file("employees.txt");
 
-    file.close();
-
-    while(file>>emp_id)
-    {
-        file>>emp_Id>>firstName>>middleName>>lastName>>
+    while(file>>emp_Id>>firstName>>middleName>>lastName>>
             phoneNo>>email>>country>>city>>poBox>>
             formerCompany>>currentCompany>>
             typeOfEmployee>>age>>eduLevel>>department>>
@@ -433,7 +429,8 @@ void readFromFile()
             initialSalary>>isDeleted>>
             tax>>overtime>>grossPay>>
             netPay>>pension>>
-            otherExpenses;
+            otherExpenses)
+    {
         employee.push_back({emp_Id, firstName, middleName, lastName,
                             phoneNo, email, country, city, poBox,
                             formerCompany, currentCompany,
@@ -446,6 +443,27 @@ void readFromFile()
                             otherExpenses});
     }
     file.close();
+}
+
+void modifyFile()
+{
+    fstream fileModify("employees.txt");
+    fileModify.clear();
+    for(int i = 0; i<employee.size(); i++)
+    {
+        fileModify<<employee[i].emp_Id<<" "<<employee[i].fullName.firstName<<" "<<employee[i].fullName.middleName<<" "<<employee[i].fullName.lastName<<" "<<
+                  employee[i].address.phoneNo<<" "<<employee[i].address.email<<" "<<employee[i].address.country<<" "<<employee[i].address.city<<" "<<employee[i].address.poBox<<" "<<
+                  employee[i].experienceYY.formerCompany<<" "<<employee[i].experienceYY.currentCompany<<" "<<
+                  employee[i].typeOfEmployee<<" "<<employee[i].age<<" "<<employee[i].eduLevel<<" "<<employee[i].department<<" "<<
+                  employee[i].dOfEmployment<<" "<<employee[i].mOfEmployment<<" "<<employee[i].yOfEmployment<<" "<<
+                  employee[i].gender<<" "<<employee[i].position<<" "<<
+
+                  employee[i].initialSalary<<" "<<employee[i].isDeleted<<" "<<
+                  employee[i].payroll.tax<<" "<<employee[i].payroll.overtime<<" "<<employee[i].payroll.grossPay<<" "<<
+                  employee[i].payroll.netPay<<" "<<employee[i].payroll.pension<<" "<<
+                  employee[i].payroll.otherExpenses<<endl;
+    }
+    fileModify.close();
 }
 
 void addToFile()
@@ -463,10 +481,9 @@ void addToFile()
 
                employee[i].initialSalary<<" "<<employee[i].isDeleted<<" "<<
                employee[i].payroll.tax<<" "<<employee[i].payroll.overtime<<" "<<employee[i].payroll.grossPay<<" "<<
-               employee[i].payroll.netPay<<employee[i].payroll.pension<<" "<<
+               employee[i].payroll.netPay<<" "<<employee[i].payroll.pension<<" "<<
                employee[i].payroll.otherExpenses<<endl;
     }
- 
     fileAdd.close();
 }
 
@@ -478,9 +495,8 @@ void calculatePayroll(int i)
     if(employee[i].age >= 65)
         employee[i].payroll.pension = (pensionPercent/100) * employee[i].payroll.grossPay;
     else
-        employee[i].payroll.pension = 0;
+        employee[i].payroll.pension = (pensionPercent/100) * employee[i].payroll.grossPay;
     employee[i].payroll.netPay = employee[i].payroll.grossPay + (employee[i].payroll.overtime * overtimeConstant) - (employee[i].payroll.otherExpenses + employee[i].payroll.tax);
-
 }
 
 void insertEmployeeRecord()  //insert employee record
@@ -525,7 +541,6 @@ void insertEmployeeRecord()  //insert employee record
         cin>>employee[i].dOfEmployment>>employee[i].mOfEmployment>>employee[i].yOfEmployment;
         cout<<"Salary Payment Type: ";
         cin>>employee[i].typeOfEmployee;
-        cin.ignore();
         cout<<"Work Experience at former company(in Years): ";
         cin>>employee[i].experienceYY.formerCompany;
         cout<<"Work Experience at current company(in Years): ";
@@ -567,6 +582,7 @@ void editEmployeeRecord()    //edit record
                 cin>>employee[i].fullName.middleName;
                 cout<<"Last Name: ";
                 cin>>employee[i].fullName.lastName;
+                modifyFile();
                 cout<<"\nEditing Complete! Press ENTER to continue"<<endl;
                 return;
             }
@@ -585,6 +601,7 @@ void editEmployeeRecord()    //edit record
                 cin>>employee[i].address.city;
                 cout<<"P.O. Box: ";
                 cin>>employee[i].address.poBox;
+                modifyFile();
                 cout<<"\nEditing Completed! Press ENTER to continue"<<endl;
                 return;
             }
@@ -596,6 +613,7 @@ void editEmployeeRecord()    //edit record
                 cin>>employee[i].department;
                 cout<<"Position: ";
                 cin>>employee[i].position;
+                modifyFile();
                 cout<<"\nEditing Completed! Press ENTER to continue"<<endl;
                 return;
             }
@@ -616,6 +634,7 @@ void deleteEmployeeRecord()  //delete record
         if(id == employee[i].emp_Id && employee[i].isDeleted == false)
         {
             employee[i].isDeleted = true;
+            modifyFile();
             cout<<"Record Deleted"<<endl;
             return;
         }
