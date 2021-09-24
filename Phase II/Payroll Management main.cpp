@@ -3,10 +3,8 @@
 #include"arrowMenu.h"   //displays the menus in the form of arrow using arrow keys
 using namespace std;
 typedef unsigned short int ushort;
-const ushort employeeSize = 100;
 char displayTableScreenSize[] = "mode con: cols=300 lines=50";  //change size of console window
 char displayNormalScreenSize[] = "mode con: cols=100 lines=45";
-ushort employeeCounter = 0;
 string menuArray[] = {"\tMain Menu(use arrow keys to navigate)\n\t---------",
                       "1. Display All Employee Information",
                       "2. Display All Employee's Payroll Information",
